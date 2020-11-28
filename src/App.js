@@ -8,7 +8,7 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [apiResponseData, setResponseApiData] = useState(null);
+  const [apiResponseData, setApiResponseData] = useState(null);
   const [filteredDataElements, setfilteredDataElements] = useState(null);
   const [loading, setLoading] = useState(true);
   const [searchField, setSearchField] = useState('');
@@ -17,7 +17,7 @@ function App() {
     async function fetchData() {
       try {
         const response = await axios.get('https://www.cubyt.io/data/categories');
-        setResponseApiData(response.data);
+        setApiResponseData(response.data);
         setLoading(false);
       } catch (err) {
         setLoading(false);
