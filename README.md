@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# Installation
+
+Make sure you have an updated version of node and npm
+Then, simply `npm install` and `npm start`
+
+# Create React App Documentation
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
