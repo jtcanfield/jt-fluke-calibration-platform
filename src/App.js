@@ -113,6 +113,8 @@ function App() {
         >
           {apiError && <MuiAlert elevation={6} severity="error">Unable to fetch data, please try again later.</MuiAlert>}
           {filteredDataElements}
+          {(filteredDataElements && filteredDataElements.length === 0 && !apiError && !loading)
+          && <Typography>No Results</Typography>}
         </Grid>
       </Container>
     </div>
