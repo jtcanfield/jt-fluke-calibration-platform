@@ -49,14 +49,11 @@ function ItemCard({
             <Typography variant="h5">
               {displayName}
             </Typography>
-            {description && (
-              <Typography>
-                Description:
-                {description}
-              </Typography>
-            )}
           </Grid>
         </Grid>
+        <Typography variant="subtitle1">
+          {description && description.length ? description : 'No description avaiable'}
+        </Typography>
       </Card>
     </Grid>
   );
