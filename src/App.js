@@ -90,7 +90,8 @@ function App() {
           label="Search"
           type="search"
           variant="outlined"
-          onChange={(e) => setSearchField(e.target.value)}
+          value={searchField}
+          onChange={(e) => setSearchField(e.target.value.replace(/[^\w\s]/, ''))}
         />
         <IconButton
           color="primary"
