@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Card, CardContent, CardMedia, Grid, Typography,
+  Card, CardMedia, Grid, Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import defaultIcon from './default.png';
@@ -12,6 +12,7 @@ const useStyles = makeStyles(() => ({
     width: '75px',
     objectFit: 'contain',
     margin: 'auto',
+    padding: '5px',
     display: 'block',
   },
 }));
@@ -26,7 +27,7 @@ function ItemCard({
 
   return (
     <Grid item xs={11} md={5} lg={3}>
-      <Card raised variant="elevation" id={categoryName}>
+      <Card className="height-full" raised variant="elevation" id={categoryName}>
         <Grid
           container
           wrap="nowrap"
@@ -44,18 +45,16 @@ function ItemCard({
               title="Contemplative Reptile"
             />
           </Grid>
-          <Grid item>
-            <CardContent>
-              <Typography>
-                {displayName}
-              </Typography>
-              {description && (
+          <Grid item xs>
+            <Typography variant="h5">
+              {displayName}
+            </Typography>
+            {description && (
               <Typography>
                 Description:
                 {description}
               </Typography>
-              )}
-            </CardContent>
+            )}
           </Grid>
         </Grid>
       </Card>
