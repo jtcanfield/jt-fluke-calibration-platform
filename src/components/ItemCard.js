@@ -26,7 +26,7 @@ function ItemCard({
   const classes = useStyles();
 
   return (
-    <Grid item xs={11} md={5} lg={3}>
+    <Grid item xs={11} md={5} lg={3} className="text-center">
       <Card className="height-full" raised variant="elevation" id={categoryName}>
         <Grid
           container
