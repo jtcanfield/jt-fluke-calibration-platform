@@ -23,11 +23,11 @@ function App() {
       try {
         const response = await axios.get('https://www.cubyt.io/data/categories');
         setApiResponseData(response.data);
-        setLoading(false);
         setApiError(false);
       } catch (err) {
-        setLoading(false);
         setApiError(true);
+      } finally {
+        setLoading(false);
       }
     }
     fetchData();
