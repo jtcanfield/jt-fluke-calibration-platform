@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   AppBar, Backdrop, Container, CircularProgress, Grid, Modal, TextField, Toolbar, Typography,
 } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import axios from 'axios';
 import ItemCard from './components/ItemCard';
 import logo from './logo.svg';
@@ -11,6 +12,7 @@ function App() {
   const [apiResponseData, setApiResponseData] = useState(null);
   const [filteredDataElements, setfilteredDataElements] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [apiError, setApiError] = useState(false);
   const [searchField, setSearchField] = useState('');
 
   useEffect(() => {
@@ -19,8 +21,10 @@ function App() {
         const response = await axios.get('https://www.cubyt.io/data/categories');
         setApiResponseData(response.data);
         setLoading(false);
+        setApiError(false);
       } catch (err) {
         setLoading(false);
+        setApiError(true);
       }
     }
     fetchData();
@@ -89,6 +93,7 @@ function App() {
           alignItems="stretch"
           spacing={1}
         >
+          {apiError && <MuiAlert elevation={6} severity="error">Unable to fetch data, please try again later.</MuiAlert>}
           {filteredDataElements}
         </Grid>
       </Container>
