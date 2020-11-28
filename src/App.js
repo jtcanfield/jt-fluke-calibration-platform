@@ -108,7 +108,7 @@ function App() {
           container
           justify="center"
           alignItems="stretch"
-          spacing={1}
+          spacing={2}
         >
           {apiError && <MuiAlert elevation={6} severity="error">Unable to fetch data, please try again later.</MuiAlert>}
           {filteredDataElements}
