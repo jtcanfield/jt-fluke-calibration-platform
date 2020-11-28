@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  AppBar, Container, Grid, Toolbar, Typography,
+  AppBar, Backdrop, Container, CircularProgress, Grid, Modal, Toolbar, Typography,
 } from '@material-ui/core';
 import axios from 'axios';
 import ItemCard from './components/ItemCard';
@@ -36,6 +36,11 @@ function App() {
         </AppBar>
         <img src={logo} className="App-logo" alt="logo" />
       </header>
+      <Modal open={loading} closeAfterTransition>
+        <Backdrop in={loading} open={loading} transitionDuration={300}>
+          <CircularProgress aria-busy="true" size={100} />
+        </Backdrop>
+      </Modal>
       <Container>
         <Grid
           container
