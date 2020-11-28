@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
-  AppBar, Backdrop, Container, CircularProgress, Grid, Modal, TextField, Toolbar, Typography,
+  AppBar, Backdrop, Container, CircularProgress, Grid, IconButton,
+  Modal, TableSortLabel, TextField, Toolbar, Typography,
 } from '@material-ui/core';
+import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 import MuiAlert from '@material-ui/lab/Alert';
 import axios from 'axios';
 import ItemCard from './components/ItemCard';
@@ -14,6 +16,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(false);
   const [searchField, setSearchField] = useState('');
+  const [alphabeticalSort, setAlphabeticalSort] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,7 +35,11 @@ function App() {
 
   useEffect(() => {
     function drawFilteredElements() {
-      return apiResponseData.reduce((accumulator, info) => {
+      const sortedApiResponseData = alphabeticalSort
+        ? [...apiResponseData].sort((a, b) => a.display_name.localeCompare(b.display_name))
+        : [...apiResponseData].sort((a, b) => b.display_name.localeCompare(a.display_name));
+
+      return sortedApiResponseData.reduce((accumulator, info) => {
         if (searchField.length > 0) {
           const searchRegex = new RegExp(searchField, 'i');
           if (!searchRegex.test(info.category_name)
@@ -56,15 +63,15 @@ function App() {
     if (apiResponseData && apiResponseData.length > 0) {
       setfilteredDataElements(drawFilteredElements());
     }
-  }, [searchField, apiResponseData]);
+  }, [searchField, apiResponseData, alphabeticalSort]);
 
   return (
-    <div className="App">
+    <div>
       <header className="App-header">
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6">
-              Fluke
+              Fluke Calibration Platform
             </Typography>
           </Toolbar>
         </AppBar>
@@ -85,6 +92,16 @@ function App() {
           variant="outlined"
           onChange={(e) => setSearchField(e.target.value)}
         />
+        <IconButton
+          color="primary"
+          onClick={() => setAlphabeticalSort(!alphabeticalSort)}
+        >
+          <TableSortLabel
+            active
+            direction={alphabeticalSort ? 'desc' : 'asc'}
+          />
+          <SortByAlphaIcon />
+        </IconButton>
       </Container>
       <Container>
         <Grid
